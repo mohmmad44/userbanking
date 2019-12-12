@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+
+
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+	
+	
+<style type="text/css">
+.col-md-4 {
+	margin-bottom: 10px;
+}
+
+.card-body {
+	background: #234238;
+	color: #fff;
+	text-align: center;
+}
+
+.card-body:hover {
+	background: #1abf8a;
+	color: #fff;
+	text-align: center;
+}
+</style>
+</head>
+<body>
+
+
+<div class="container-fluid">
+<form method="post" class="needs-validation"  id="registrationForm" name="registrationForm" 
+                th:action="@{${isSaved?'/savebankbranch':'/updatebankbranch'}}" th:object="${bankBranch}">
+  
+   <div class="row">
+  
+    <div class="col-md-2 mb-8">
+      <label for="validationCustom01">Bank Name</label>
+      <select id="bankId" th:field="*{bankId}" class="form-control">
+       <option value="">Select Bank</option>
+       <option th:value="${bank.id}" th:each="bank : ${allbanks}" th:text="${bank.bankName}"></option>
+      </select>
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+    <div class="col-md-4 mb-8">
+      <label for="validationCustom01">Branch Name</label>
+      <input type="text" class="form-control"  placeholder="Branch name" th:field="*{bankBranch}" required="required" >
+    </div>
+    
+    <div class="col-md-4 mb-8">
+      <label for="validationCustom01">IFSC CODE</label>
+      <input type="text" class="form-control"  placeholder="IFSC CODE" th:field="*{ifscCode}" required="required" >
+    </div>
+    
+    <div class="col-md-4 mb-8">
+      <label for="validationCustom01">Bank Address</label>
+      <textarea  class="form-control"  placeholder="Bank Address" th:field="*{bankAddress}" required="required" ></textarea>
+    </div>
+    
+       
+    
+ <input type="hidden" th:field="*{bankAddressId}">
+    <div style="margin-top:20px;">
+    	<label for="validationCustom01">&nbsp;</label>
+     <button class="btn btn-primary" type="submit" th:text="${isSaved?'Save':'Update'}">save</button>
+     </div>
+  
+  
+  
+   
+    </div>
+    
+</form>
+</div>
+
+
+
+
+
+
+
+
+	<div class="container-fluid">
+		<div class="row" style="margin-top: 20px;">
+			<div class="col-md-12" >
+				
+					<table class="table">
+						<thead>
+							<tr>
+								<th scope="col">Bank Name</th>
+								<th scope="col">Bank Address</th>
+								<th scope="col">Bank Branch</th>
+								<th scope="col">Ifsc Code</th>
+								<th scope="col">action</th>
+								
+							
+								
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="bankBranch : ${bankBranchs}">
+								
+								<td th:text="${bankBranch.bank.bankName}"></td>
+								<td th:text="${bankBranch.bankAddress.bankAddress}"></td>
+								<td th:text="${bankBranch.bankAddress.bankBranch}"></td>
+								<td th:text="${bankBranch.bankAddress.ifscCode}"></td>
+								
+								<td > <a th:href= "@{'/getbankbranchs/' + ${bankBranch.id}}"> edit </a>
+								<a th:href= "@{'/getbankbranchs/' + ${bankBranch.id} + '/' + ${bankBranch.bankAddress.id}}"> delete </a></td>
+								
+							</tr>
+							
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+</body>
+</html>

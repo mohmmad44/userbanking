@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+
+
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+	
+	
+<style type="text/css">
+.col-md-4 {
+	margin-bottom: 10px;
+}
+
+.card-body {
+	background: #234238;
+	color: #fff;
+	text-align: center;
+}
+
+.card-body:hover {
+	background: #1abf8a;
+	color: #fff;
+	text-align: center;
+}
+</style>
+</head>
+<body>
+
+
+<div class="container-fluid">
+<form method="post" class="needs-validation"  id="registrationForm" name="registrationForm" 
+                th:action="@{${isSaved?'/saveuserbankbranch':'/updatebankbranch'}}" th:object="${userbankbranch}">
+  
+   <div class="row">
+  
+   <div class="col-md-3 mb-8">
+      <label for="validationCustom01">Bank Name</label>
+      <select id="bankId" th:field="*{bankId}" class="form-control">
+       <option value="">Select Bank</option>
+       <option th:value="${bank.id}" th:each="bank : ${allBanks}" th:text="${bank.bankName}"></option>
+      </select>
+    </div>
+    
+   
+   
+    
+     <div class="col-md-3 mb-8">
+      <label for="validationCustom01">Bank Branch</label>
+      <select  id="bankBranchId" th:field="*{bankAddressId}" class="form-control">
+       <option value="">Select BankBranch </option>
+      </select>
+    </div>
+    
+    
+    
+    
+    
+   
+   <br>
+   <br>
+   <br>
+   <br>
+    
+        
+    <div class="col-md-4 mb-8">
+      <label for="validationCustom01">User First Name</label>
+      <input type="text" class="form-control"  placeholder="first name" th:field="*{firstName}" required="required" >
+    </div>
+    
+    <div class="col-md-4 mb-8">
+      <label for="validationCustom01">User Last Name</label>
+      <input type="text" class="form-control"  placeholder="last name" th:field="*{lastName}" required="required" >
+    </div>
+    
+    <div class="col-md-4 mb-8">
+      <label for="validationCustom01">User email</label>
+      <input  class="form-control"  placeholder="User email" th:field="*{email}" required="required" ></input>
+    </div>
+    
+        
+    <div class="col-md-4 mb-8">
+      <label for="validationCustom01">User mobile number</label>
+      <input  class="form-control"  placeholder="User Mobile Number" th:field="*{mobileNumber}" required="required" ></input>
+    </div>
+    
+    
+    <div class="col-md-4 mb-8">
+      <label for="validationCustom01">User House Number</label>
+      <input  class="form-control"  placeholder="House Number" th:field="*{houseNumber}" required="required" ></input>
+    </div>
+    
+    
+    <div class="col-md-4 mb-8">
+      <label for="validationCustom01">User street</label>
+      <input  class="form-control"  placeholder="User street" th:field="*{street}" required="required" ></input>
+    </div>
+    
+    
+    <div class="col-md-4 mb-8">
+      <label for="validationCustom01">User street number</label>
+      <input  class="form-control"  placeholder="User street Number" th:field="*{streetNumber}" required="required" ></input>
+    </div>
+    
+    <div class="col-md-4 mb-8">
+      <label for="validationCustom01">User city</label>
+      <input  class="form-control"  placeholder="User city" th:field="*{city}" required="required" ></input>
+    </div>
+    
+    
+    <div class="col-md-4 mb-8">
+      <label for="validationCustom01">User postal code</label>
+      <input  class="form-control"  placeholder="User postal Code" th:field="*{postalCode}" required="required" ></input>
+    </div>
+    
+  
+       
+    
+    <div style="margin-top:20px;">
+    	<label for="validationCustom01">&nbsp;</label>
+     <button class="btn btn-primary" type="submit" th:text="${isSaved?'Save':'Update'}">save</button>
+     </div>
+  
+  
+  
+   
+    </div>
+    
+</form>
+</div>
+
+
+
+
+
+
+
+
+	<div class="container-fluid">
+		<div class="row" style="margin-top: 20px;">
+			<div class="col-md-12" >
+				
+					<table class="table">
+						<thead>
+							<tr>
+								<th scope="col">First Name</th>
+								<th scope="col">last Address</th>
+								<th scope="col">Bank Name</th>
+								<th scope="col">Bank Branch</th>
+								<th scope="col">IFSC Code</th>
+								
+							
+								
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="userBankBranch : ${userBankBranchs}">
+								
+								<td th:text="${userBankBranch.user.firstName}"></td>
+								<td th:text="${userBankBranch.user.lastName}"></td>
+								<td th:text="${userBankBranch.bankBranchs.bank.bankName}"></td>
+								<td th:text="${userBankBranch.bankBranchs.bankAddress.bankBranch}"></td>
+								<td th:text="${userBankBranch.bankBranchs.bankAddress.ifscCode}"></td>
+								
+								<td > </td>
+								
+							</tr>
+							
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+</body>
+
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+$('#bankId').on('change', function() {
+	 var bankId = $(this).val();
+	 var optiondata = [];
+	 optiondata.push('<select id="bankBranchId" name="bankAddressId" class="form-control">');
+	 optiondata.push('<option value="">Select BankBranch </option>');
+	 $.get("/getuserbank/" + bankId, function(response) {
+		 for (var i =0;  i< response.length; i++) {
+			 optiondata.push("<option value="+response[i].bankAddress.id + ">"+response[i].bankAddress.bankBranch+"-"+response[i].bankAddress.ifscCode+"</option>")
+		 }
+		 optiondata.push('</select>');
+		 $("#bankBranchId").html(optiondata);
+	 });
+	 
+	 
+	});
+	
+	
+</script>
+</body>
+
+
+
+
+
+</html>

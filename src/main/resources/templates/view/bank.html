@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+
+
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+	
+	
+<style type="text/css">
+.col-md-4 {
+	margin-bottom: 10px;
+}
+
+.card-body {
+	background: #234238;
+	color: #fff;
+	text-align: center;
+}
+
+.card-body:hover {
+	background: #1abf8a;
+	color: #fff;
+	text-align: center;
+}
+</style>
+</head>
+<body>
+
+
+<div class="container-fluid">
+<form method="post" class="needs-validation"  id="registrationForm" name="registrationForm" th:action="@{${isSaved?'/savebank':'/updatebank'}}" th:object="${bank}">
+  <div class="row">
+    <div class="col-md-4 mb-3">
+      <label for="validationCustom01">First name</label>
+      <input type="text" class="form-control" id="validationCustom01" placeholder="Bank name" th:field="*{bankName}" required="required" >
+      <div class="valid-feedback">
+        Looks good!
+      </div>
+
+    </div>
+ 
+   
+    </div>
+    <input type="hidden" th:field="*{id}">
+     <button class="btn btn-primary" type="submit" th:text="${isSaved?'Save':'Update'}">save</button>
+</form>
+</div>
+
+
+
+
+
+
+
+
+	<div class="container-fluid">
+		<div class="row" style="margin-top: 20px;">
+			<div class="col-md-12" >
+				
+					<table class="table">
+						<thead>
+							<tr>
+								<th scope="col">Id</th>
+								<th scope="col">Bank Name</th>
+								<th scope="col">action</th>
+								
+							
+								
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="bank : ${allbanks}">
+								
+								<td th:text="${bank.id}"></td>
+								<td th:text="${bank.bankName}"></td>
+								
+								<td > <a th:href= "@{'/getbank/' + ${bank.id}}"> edit </a>
+								<a th:href= "@{'/deletebank/' + ${bank.id}}"> delete </a></td>
+								
+								
+							</tr>
+							
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+</body>
+</html>
